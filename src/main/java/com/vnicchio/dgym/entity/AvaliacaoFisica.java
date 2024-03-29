@@ -2,6 +2,8 @@ package com.vnicchio.dgym.entity;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ public class AvaliacaoFisica {
 
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "aluno_id")
+  @JsonIgnore
   private Aluno aluno;
 
   private LocalDateTime dataDaAvaliacao  = LocalDateTime.now();
