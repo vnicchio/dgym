@@ -17,6 +17,8 @@ import com.vnicchio.dgym.entity.AvaliacaoFisica;
 import com.vnicchio.dgym.entity.dto.AlunoDTO;
 import com.vnicchio.dgym.service.Impl.AlunoServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/alunos")
 public class AlunoController {
@@ -35,7 +37,7 @@ public class AlunoController {
   }
 
   @PostMapping
-  public Aluno criaAluno(@RequestBody AlunoDTO aluno) {
+  public Aluno criaAluno(@Valid @RequestBody AlunoDTO aluno) {
     return service.create(aluno);
   }
 
