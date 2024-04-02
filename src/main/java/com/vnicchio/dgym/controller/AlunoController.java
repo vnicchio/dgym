@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vnicchio.dgym.entity.Aluno;
@@ -26,10 +27,10 @@ public class AlunoController {
   @Autowired
   private AlunoServiceImpl service;
   
-  @GetMapping
-  public List<Aluno> getAllAlunos() {
-    return service.getAll();
-  }
+  // @GetMapping
+  // public List<Aluno> getAllAlunos() {
+  //   return service.getAll();
+  // }
 
   @GetMapping("/{id}")
   public Aluno getAluno(@PathVariable Long id) {
@@ -51,6 +52,11 @@ public class AlunoController {
   @GetMapping("/{id}/avaliacao-fisica")
   public List<AvaliacaoFisica> getAvaliacoesFisicas(@PathVariable Long id) {
     return service.getAllAvaliacoesFisicas(id);
+  }
+
+  @GetMapping
+  public List<Aluno> getAllAlunos(@RequestParam(value = "dataDeNascimento", required = false) String dataDeNascimento) {
+    return service.getAll(dataDeNascimento);
   }
 
 }

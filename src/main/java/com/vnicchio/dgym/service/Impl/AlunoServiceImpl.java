@@ -1,5 +1,6 @@
 package com.vnicchio.dgym.service.Impl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import com.vnicchio.dgym.entity.dto.AlunoDTO;
 import com.vnicchio.dgym.entity.dto.AlunoUpdateDTO;
 import com.vnicchio.dgym.repository.AlunoRepository;
 import com.vnicchio.dgym.service.IAlunoService;
+import com.vnicchio.dgym.utils.LocalDateUtil;
 
 @Service
 public class AlunoServiceImpl implements IAlunoService{
@@ -35,8 +37,13 @@ public class AlunoServiceImpl implements IAlunoService{
   }
 
   @Override
-  public List<Aluno> getAll() {
-    return repository.findAll();
+  public List<Aluno> getAll(String dataDeNascimento) {
+    if (dataDeNascimento == null) {
+      return repository.findAll(); 
+    } else {
+      LocalDate data = LocalDate.parse(dataDeNascimento, LocalDateUtil.LOCAL_DATE_FORMATTER);
+      return repository.findByDataDeNascimento(data);
+    }
   }
 
   @Override
